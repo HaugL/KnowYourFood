@@ -1,0 +1,22 @@
+ <h3>Sections</h3>
+ <%=  simple_form_for [@article, @section] do |f| %>
+ 	  <%= f.label :title %>
+	  <%= f.text_field :title %>
+	  <%= f.label :text %>
+	  <%= f.text_field :text %>
+	  <br>
+	  <br>
+	  <%= f.button :submit, 'Add Section' %>
+ <% end %>
+
+ <% if @article.sections.any? %>
+ 	<h4>Already Existing Articles</h4>
+ 	<% @article.sections.each do |section| %>
+ 		<h3><%= section.title %><h3>
+ 		<h4><%= section.text %></h4>
+ 		<br>
+ 	<% end %>
+
+ <% end %>
+
+ <%= link_to 'Create the Article', articles_path%>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IndStudy</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+<!-- header -->
+    <div class="page-header">
+    <img src="/images/logo.png" alt = "logo" width="150" height="228" align = "left">
+    <br>
+    <br>
+    <div style="padding-left: 160px;">
+    <font face="arial black, monaco, chicago" size=8>Independant Study</font> 
+    <h1><small>Subtext for header</small></h1>
+    </div> 
+
+    </div>
+
+<body>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+      <!--Sidebar content-->
+        <div class="well well-space">
+            <i class="icon-bookmark"> </i>
+         	  <%= link_to 'View Articles', articles_path %>
+         	<br>
+            <% if session[:user] %>
+              <i class="icon-hand-right"> </i>
+              <%= link_to 'Log-Out', session_delete_path(session[:user]) %>
+            <% else %>
+              <i class="icon-hand-left"> </i>
+              <%= link_to 'Log-In', new_session_path %>
+            <br>
+            <% end %>
+
+            <i class="icon-bookmark"> </i>
+            <%= link_to 'Create Article', new_article_path %>
+            <br>
+
+   
+          <br><br>
+          <i class="icon-home"> </i>
+      
+          <br>
+          <i class="icon-star"> </i>
+    
+        
+
+        </div>
+      </div>
+      <div class="span10">
+      <!--Body content-->
+
+      <%= yield %>
+
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
+
+
+

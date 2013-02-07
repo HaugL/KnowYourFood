@@ -1,0 +1,17 @@
+ <% if @error != nil %>
+ <%= @error %>
+ <% end %>
+
+<h1>Admin Log in</h1>
+<%=  simple_form_for :user, :url => sessions_path, 
+      :method => 'post' do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <br>
+  <%= f.button :submit, 'Log-In' %>
+  <% end %>
+
+  <%= link_to "Sign-Up", new_user_path %>
