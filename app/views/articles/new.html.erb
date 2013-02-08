@@ -1,0 +1,16 @@
+ <h3>Titles</h3>
+ <br>
+ <h4>Different foods can be called by different names. Pork could be called pigs, ham, bacon, etc.</h4>
+ <h4>Enter the different names you wish this article to be searchable by. Put commas in between each one</h4>
+ <h4>An example of this would be Pork, Pigs, Pig, Bacon, Ham</h4>
+
+
+ <%=  simple_form_for :titles, :url => create_article_path, 
+ 					  :method => 'post' do |f| %>
+
+	  <%= f.text_field :list %>
+	  <br>
+	  <br>
+	  <%= f.button :submit, 'Create Article' %>
+ <% end %>
+

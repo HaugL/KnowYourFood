@@ -1,4 +1,4 @@
-class TitlesController < ApplicationController
+class ArticleTitlesController < ApplicationController
 
 	def new
 		@article = Article.find(params[:article_id])

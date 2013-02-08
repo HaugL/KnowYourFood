@@ -1,5 +1,11 @@
- <%=  simple_form_for @titles, :url => do |f| %>
-	  <%= f.label :titles %>
-	  <%= f.text_field :titles %>
-	  <%= f.button :submit %>
- <% end %>
+
+<h1>
+	<% @titles.each do |title| %>
+		<%= title %> , 
+	<% end %>
+
+	<!-- How to edit? Can't just let them have text field, need
+	to destroy them properly. hmmm -->
+</h1>
+
+<%= link_to 'Add Section', new_article_section_path(@article), :class => 'btn'%>
