@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
 	def edit
 		@article = Article.find(params[:id])
 		@titles = @article.article_titles
+		@section_titles = @article.section_titles
 	end
 
 	def index

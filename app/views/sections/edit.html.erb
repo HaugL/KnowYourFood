@@ -1,21 +1,17 @@
  <h3>Sections</h3>
- <%=  simple_form_for [@article, @section] do |f| %>
+<%=  simple_form_for :model, :url => article_section_create_path(@article), 
+ 					  :method => 'post' do |f| %>
  	  <%= f.label :title %>
-	  <%= f.text_field :title %>
+	  <%= f.text_field :title, :label => 'Title' %>
+	  <br>
 	  <%= f.label :text %>
-	  <%= f.text_field :text %>
+	  <%= f.text_area :text %>
 	  <br>
-	  <br>
-	  <%= f.button :submit, 'Add Section' %>
+	  <%= f.button :submit, 'Create Article' %>
  <% end %>
 
- <% if @article.sections.any? %>
- 	<h4>Already Existing Articles</h4>
- 	<% @article.sections.each do |section| %>
- 		<h3><%= section.title %><h3>
- 		<h4><%= section.text %></h4>
- 		<br>
- 	<% end %>
+
+ <% if @article %>
 
  <% end %>
 

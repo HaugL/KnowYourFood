@@ -1,7 +1,7 @@
 class SectionsController < ApplicationController
 	def new
 		@article = Article.find(params[:article_id])
-		@section = @article.sections.new
+		@section = Section.new
 		render 'edit'
 	end
 
@@ -11,9 +11,10 @@ class SectionsController < ApplicationController
 
 	def create
 		@article = Article.find(params[:article_id])
-		section = @article.sections.create(params[:section])
-		@section = @article.sections.new
-		render 'edit'	
+		title = @article.section_titles.create(:title => params[:model][:title])
+		section = title.sections.create(:text => params[:model][:text])
+
+		redirect_to edit_article_path(@article)
 	end
 
 

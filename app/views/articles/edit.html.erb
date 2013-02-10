@@ -9,3 +9,10 @@
 </h1>
 
 <%= link_to 'Add Section', new_article_section_path(@article), :class => 'btn'%>
+
+<br>
+<% @section_titles.each do |title| %>
+	<h3> <%= title.title %> </h3>
+	<br>
+	<br>
+<% end %>

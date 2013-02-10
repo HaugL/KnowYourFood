@@ -16,6 +16,7 @@ resources :articles, :only => [:show, :index, :new, :create, :edit] do
     post 'add' => 'sections#create'
     get 'delete' => 'sections#delete'
   end
+  post 'section_create' => 'sections#create'
 end
 post 'create_article' => 'articles#create'
 
