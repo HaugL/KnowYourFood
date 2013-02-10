@@ -8,9 +8,6 @@ resources :sessions, :only => [:new, :create]do
 end
 
 resources :articles, :only => [:show, :index, :new, :create, :edit] do
-  resources :titles, :only => [:new, :edit, :create, :update] do
-    get 'delete' => 'titles#delete'
-  end
   resources :sections, :only => [:new, :create] do
     resources :sub_sections, :only => [:new, :create] do
        post 'add' => 'sub_sections#create'
@@ -20,6 +17,7 @@ resources :articles, :only => [:show, :index, :new, :create, :edit] do
     get 'delete' => 'sections#delete'
   end
 end
+post 'create_article' => 'articles#create'
 
 resources :users, :only => [:show, :new, :create]
 
