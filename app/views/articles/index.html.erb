@@ -3,6 +3,18 @@
 
 
 <% @articles.each do |article| %>
- 		<h4>
- 			<%= link_to article.id, article_path(article) %>
+ 		<p>
+ 			<% name = get_names(article) %>
+ 			<% if name.nil? %>
+ 				<%= link_to 'No Name', article_path(article) %>
+ 			<% else %>
+ 				<%= link_to name, article_path(article) %>
+ 			<% end %>
+
+ 			<% if session[:admin] != nil %>
+
+ 				<%= link_to 'Edit', edit_article_path(article), :class => 'btn' %>
+ 				<%= link_to 'Delete', article_path(article), :method => :delete, :class => 'btn' %>
+ 			<% end %>
+ 		</p>
  	<% end %>

@@ -1,4 +1,18 @@
 class ArticlesController < ApplicationController
+	 before_filter :check_admin, :only => [:new, :create, :edit, :update]
+	 helper_method :get_names
+
+###########################################
+
+	def check_admin
+
+	 	unless session[:admin]
+	 		redirect_to root_path()
+	 	end
+	end
+
+
+###########################################
 
 	def new
 		@article = Article.create
@@ -15,11 +29,17 @@ class ArticlesController < ApplicationController
 		redirect_to edit_article_path(@article.id)
 	end
 
+
+###########################################
+
 	def edit
 		@article = Article.find(params[:id])
 		@titles = @article.article_titles
 		@section_titles = @article.section_titles
 	end
+
+
+###########################################
 
 	def index
 		@articles = Article.all
@@ -27,9 +47,33 @@ class ArticlesController < ApplicationController
 
 	def show
 		@article = Article.find(params[:id])
-		@titles =  @article.titles
-		@sections = @article.sections.all
+		@section_titles = @article.section_titles
 	end
+
+
+###########################################
+
+	def destroy
+		Article.find(params[:id]).destroy
+		redirect_to articles_path
+	end
+
+###########################################
+
+	public
+
+	def get_names article
+		names_a = article.article_titles
+		name = ''
+
+		names_a.each do |n|
+			name = name + ', '+n.title 
+		end
+
+		name.chop.chop!
+		return name[2..name.length]
+	end
+
 
 
 

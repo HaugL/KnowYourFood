@@ -30,9 +30,10 @@
             <i class="icon-bookmark"> </i>
          	  <%= link_to 'View Articles', articles_path %>
          	<br>
-            <% if session[:user] %>
+            <% if session[:user] || session[:admin]%>
               <i class="icon-hand-right"> </i>
-              <%= link_to 'Log-Out', session_delete_path(session[:user]) %>
+              <%= link_to 'Log-Out', delete_sessions_path, :method => :delete%>
+              <br>
             <% else %>
               <i class="icon-hand-left"> </i>
               <%= link_to 'Log-In', new_session_path %>

@@ -4,21 +4,18 @@ IndStudy::Application.routes.draw do
 root :to => 'pages#home'
 
 resources :sessions, :only => [:new, :create]do
-  get 'delete' => 'sessions#delete'
+  collection do
+    delete 'delete'
+  end
 end
 
-resources :articles, :only => [:show, :index, :new, :create, :edit] do
-  resources :sections, :only => [:new, :create] do
-    resources :sub_sections, :only => [:new, :create] do
-       post 'add' => 'sub_sections#create'
-       get 'delete' => 'sub_sections#delete'
-    end
-    post 'add' => 'sections#create'
-    get 'delete' => 'sections#delete'
+resources :articles do
+
+  resources :sections, :except => [:show, :index] do
+      resources :sub_sections, :except => [:show, :index]
   end
-  post 'section_create' => 'sections#create'
+
 end
-post 'create_article' => 'articles#create'
 
 resources :users, :only => [:show, :new, :create]
 

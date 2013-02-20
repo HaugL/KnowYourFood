@@ -1,8 +1,6 @@
 
 <h1>
-	<% @titles.each do |title| %>
-		<%= title.title %> , 
-	<% end %>
+	<%= get_names(@article) %>
 
 	<!-- How to edit? Can't just let them have text field, need
 	to destroy them properly. hmmm -->
@@ -12,7 +10,23 @@
 
 <br>
 <% @section_titles.each do |title| %>
-	<h3> <%= title.title %> </h3>
+	<h3> 
+		<% section = Section.find_by_section_title_id(title) %>
+		<%= title.title %>
+		<%= link_to 'Edit' , edit_article_section_path(@article, section) , :class => 'btn' %> 
+		<%= link_to 'Delete', article_section_path(@article, section), :method => :delete, :class => 'btn' %>
+		<%= link_to 'Add Sub-Section', new_article_section_sub_section_path(@article, section), :class => 'btn' %>
+	</h3>
+	<%= section.text %>
+
+	<% title.sub_section_titles.each do |sub_title| %>
+		<h4>
+		<% sub_section = SubSection.find_by_sub_section_title_id(sub_title) %>
+		<%= sub_title.title %>
+		</h4>
+	<% end %>
+
+
 	<br>
 	<br>
 <% end %>

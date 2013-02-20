@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130127234210) do
+ActiveRecord::Schema.define(:version => 20130220024007) do
 
   create_table "article_titles", :force => true do |t|
     t.integer  "article_id"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(:version => 20130127234210) do
   end
 
   create_table "articles", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "comments", :force => true do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.integer  "rank"
+    t.text     "text"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -58,8 +67,9 @@ ActiveRecord::Schema.define(:version => 20130127234210) do
     t.string   "email"
     t.string   "password_hash"
     t.string   "password_salt"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.boolean  "admin",         :default => false
   end
 
 end

@@ -1,0 +1,10 @@
+
+ <%=  simple_form_for :titles, :url => create_article_title_path, 
+ 					  :method => 'put' do |f| %>
+
+	  <%= f.text_field :list %>
+	  <br>
+	  <br>
+	  <%= f.button :submit, 'Create Article' %>
+ <% end %>
+

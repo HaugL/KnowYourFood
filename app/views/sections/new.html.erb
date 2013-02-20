@@ -1,0 +1,12 @@
+ <h3>Sections</h3>
+
+<%=  simple_form_for :model, :url => article_sections_path(params[:article_id]), 
+ 					  :method => 'post' do |f| %>
+ 	  <%= f.label :title %>
+	  <%= f.text_field :title, :label => 'Title' %>
+	  <br>
+	  <%= f.label :text %>
+	  <%= f.text_area :text %>
+	  <br>
+	  <%= f.button :submit, 'Create Section' %>
+ <% end %>

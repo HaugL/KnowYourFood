@@ -3,14 +3,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts 'laaaaaaa'
-    puts params[:email]
-    puts params[:password]
   user = User.authenticate(params[:user][:email], params[:user][:password])
-  puts user
-  puts 'laaaaaaaa'
+
   if user
-    session[:user] = user
+    #If user is an admin set the session as an admin
+    if user.admin
+      session[:admin] = user
+    else
+      session[:user] = user
+    end
+
     redirect_to root_url, :notice => "Logged in!"
   else
     @error = "Invalid email or password"
@@ -18,8 +20,13 @@ class SessionsController < ApplicationController
   end
 end
 
-def delete
-  session[:user] = nil
-  redirect_to root_url, :notice => "Logged out!"
-end
+  def delete
+    reset_session
+    puts 'Admin:'
+    puts session[:admin]
+    puts 'User'
+    puts session[:user]
+    redirect_to root_url, :notice => "Logged out!"
+  end
+
 end

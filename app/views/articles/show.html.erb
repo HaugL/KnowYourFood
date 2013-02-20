@@ -1,4 +1,28 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<h1>
+	<%= get_names(@article) %>
 
-<%= @titles.first.title %>
+	<!-- How to edit? Can't just let them have text field, need
+	to destroy them properly. hmmm -->
+</h1>
+
+<br>
+<% @section_titles.each do |title| %>
+	<h3> 
+		<% section = Section.find_by_section_title_id(title) %>
+		<%= title.title %>
+	</h3>
+	<% if section.text %>
+		<%= section.text %>
+	<% end %>
+
+	<% title.sub_section_titles.each do |sub_title| %>
+		<h4>
+		<% sub_section = SubSection.find_by_sub_section_title_id(sub_title) %>
+		&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <%= sub_title.title %>
+		</h4>
+	<% end %>
+
+
+	<br>
+	<br>
+<% end %>
