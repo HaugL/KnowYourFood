@@ -1,6 +1,8 @@
 IndStudy::Application.routes.draw do
 
 
+  get "comments/show"
+
 root :to => 'pages#home'
 
 resources :sessions, :only => [:new, :create]do
@@ -15,8 +17,9 @@ resources :articles do
       resources :sub_sections, :except => [:show, :index]
   end
 
-end
+  resources :comments, :only => [:create, :show, :destroy]
 
+end
 resources :users, :only => [:show, :new, :create]
 
   # The priority is based upon order of creation:

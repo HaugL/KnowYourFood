@@ -20,9 +20,35 @@
 		<% sub_section = SubSection.find_by_sub_section_title_id(sub_title) %>
 		&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <%= sub_title.title %>
 		</h4>
+		<%= sub_section.text %>
 	<% end %>
 
 
 	<br>
 	<br>
 <% end %>
+
+<br><br>
+<h4>Comments:</h4><br>
+	<% if session[:user] || session[:admin] %>
+		<%=  simple_form_for [@article, @comment] do |f| %>
+
+		  <%= f.input :text, :label => 'Add a Comment' %>
+		  <%= f.button :submit, 'Submit' %>
+	 	<% end %>
+	<% else %>
+		<%= link_to 'Log-In', new_session_path %> to Comment
+	<% end %>
+
+	<br>
+	<% @comments.each do |comment| %>
+
+		<h4>
+			<%= comment.user.name %>
+			<% if session[:admin] %>
+				<%= link_to 'Delete', article_comment_path(@article, comment.id), :method => :delete, :class => 'btn' %>
+			<% end %>
+		</h4>
+		<%= comment.text %>
+		<br><br>
+	<% end %>

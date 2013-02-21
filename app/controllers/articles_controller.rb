@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
 ###########################################
 
 	def new
-		@article = Article.create
+		@article = Article.new
 	end
 
 	def create
@@ -48,6 +48,8 @@ class ArticlesController < ApplicationController
 	def show
 		@article = Article.find(params[:id])
 		@section_titles = @article.section_titles
+		@comment = @article.comments.new
+		@comments = @article.comments.all
 	end
 
 
