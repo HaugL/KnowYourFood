@@ -11,6 +11,11 @@ resources :sessions, :only => [:new, :create]do
   end
 end
 
+get 'article_title/:article_id' => 'article_titles#edit', :as => 'edit_article_title'
+put 'article_title/:article_id' => 'article_titles#update', :as => 'article_title'
+delete 'article_title/:article_title_id' => 'article_titles#destroy', :as => 'article_title'
+
+
 resources :articles do
 
   resources :sections, :except => [:show, :index] do
@@ -18,6 +23,8 @@ resources :articles do
   end
 
   resources :comments, :only => [:create, :show, :destroy]
+
+  resources :sources, :except => [:index, :show]
 
 end
 resources :users, :only => [:show, :new, :create]

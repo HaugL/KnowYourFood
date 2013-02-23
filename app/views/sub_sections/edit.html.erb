@@ -1,12 +1,12 @@
  <h3>New Sub_Section</h3>
 
-<%=  simple_form_for :model, :url => article_section_sub_sections_path(params[:article_id], params[:section_id]), 
- 					  :method => 'post' do |f| %>
+<%=  simple_form_for :model, :url => article_section_sub_section_path(params[:article_id], params[:section_id], @sub_section), 
+ 					  :method => 'put' do |f| %>
  	  <%= f.label :title %>
-	  <%= f.text_field :title, :label => 'Title' %>
+	  <%= f.text_field :title, :label => 'Title' , :value => @sub_title.title %>
 	  <br>
 	  <%= f.label :text %>
-	  <%= f.text_area :text %>
+	  <%= f.text_area :text, :value => @sub_section.text %>
 	  <br>
-	  <%= f.button :submit, 'Create Section' %>
+	  <%= f.button :submit, 'Create Sub-Section' %>
  <% end %>

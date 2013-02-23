@@ -18,15 +18,22 @@ class ArticleTitlesController < ApplicationController
 	end
 
 	def edit
+		@article = Article.find(params[:article_id])
+		@titles = @article.article_titles
+		@title = @article.article_titles.new
 	end
 
 	def update
+		@article = Article.find(params[:article_id])
+		@title = @article.article_titles.create(params[:article_title])
+
+		redirect_to request.referer
 	end
 
-	def delete
-		title = Title.find(params[:title_id])
+	def destroy
+		title = ArticleTitle.find(params[:article_title_id])
 		title.destroy
-		redirect_to new_article_title_path(params[:article_id])
+		redirect_to request.referer
 	end
 
 

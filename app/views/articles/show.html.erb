@@ -1,33 +1,89 @@
+<!--        -->
+<!-- Titles -->
 <h1>
 	<%= get_names(@article) %>
+	<%= link_to 'Edit Titles', edit_article_title_path(@article), :class => 'btn' if session[:admin] %>
 
 	<!-- How to edit? Can't just let them have text field, need
 	to destroy them properly. hmmm -->
 </h1>
 
+<!--          -->
+<!-- Sections -->
 <br>
-<% @section_titles.each do |title| %>
+<% @section_titles.each do |section_title| %>
+	<% section = Section.find_by_section_title_id(section_title) %>
+
+	<!-- Section Title-->
 	<h3> 
-		<% section = Section.find_by_section_title_id(title) %>
-		<%= title.title %>
+		<%= section_title.title %>
+		<!-- Admin Features for Sections-->
+		<% if session[:admin] %>
+			<%= link_to 'Edit' , edit_article_section_path(@article, section) , :class => 'btn' %> 
+			<%= link_to 'Delete', article_section_path(@article, section), :method => :delete, :class => 'btn' %>
+			<%= link_to 'Add Sub-Section', new_article_section_sub_section_path(@article, section), :class => 'btn' %>
+		<% end %>
 	</h3>
+
+	<!-- Section Text -->
 	<% if section.text %>
 		<%= section.text %>
 	<% end %>
 
-	<% title.sub_section_titles.each do |sub_title| %>
-		<h4>
+
+	<!--              -->
+	<!-- Sub_Sections -->
+	<% section_title.sub_section_titles.each do |sub_title| %>
 		<% sub_section = SubSection.find_by_sub_section_title_id(sub_title) %>
-		&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <%= sub_title.title %>
+
+		<!-- Sub-Section Title -->
+		<h4>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= sub_title.title %>
+			<!-- Admin Features for Sub-Sections -->
+			<% if session[:admin] %>
+				<%= link_to 'Edit' , edit_article_section_sub_section_path(@article, section, sub_section) , :class => 'btn' %> 
+				<%= link_to 'Delete', article_section_sub_section_path(@article, section, sub_section), :method => :delete, :class => 'btn' %>
+			<% end %>
 		</h4>
-		<%= sub_section.text %>
+
+		<!-- Sub-Section Text -->
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= sub_section.text %>
 	<% end %>
-
-
 	<br>
 	<br>
 <% end %>
 
+<!--         -->
+<!-- Sources -->
+<h1>Sources:
+	<%= link_to 'Add Source', new_article_source_path(@article), :class => 'btn' if session[:admin] %>
+</h1>
+<br>
+<% @sources.each do |source| %>
+	<!-- Source Title -->
+	<h4>
+		<%= source.title %>
+		<!-- Admin Features for Sources -->
+		<% if session[:admin] %>
+			<%= link_to 'Edit', edit_article_source_path(@article, source), :class => 'btn' %>
+			<%= link_to 'Delete', article_source_path(@article, source), :method => 'delete', :class => 'btn' %>
+		<% end %>
+	</h4>
+
+	<!-- Source Information -->
+	<%= SourceType.find(source.type_id).name %>
+	<br>
+	<%= source.source %>
+	<br>
+	<%= link_to source.link if source.link %>
+	<br>
+	<% source.notes if source.notes %>
+	<br>
+<% end %>
+
+
+<!--          -->
+<!-- Comments -->
 <br><br>
 <h4>Comments:</h4><br>
 	<% if session[:user] || session[:admin] %>

@@ -50,6 +50,7 @@ class ArticlesController < ApplicationController
 		@section_titles = @article.section_titles
 		@comment = @article.comments.new
 		@comments = @article.comments.all
+		@sources = @article.sources.all
 	end
 
 

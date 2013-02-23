@@ -1,0 +1,9 @@
+
+<%=  simple_form_for [@article, @source] do |f| %>
+	  <%= f.input :title, :label => 'Title' %>
+	  <%= f.input :type_id, collection: @types, :label =>'Types' %>
+	  <%= f.input :source, :label => 'Source' %>
+	  <%= f.input :link, :label => 'Link' %>
+	  <%= f.input :notes, :label => 'Notes' %>
+	  <%= f.button :submit, 'Create Source' %>
+ <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220024007) do
+ActiveRecord::Schema.define(:version => 20130222053305) do
 
   create_table "article_titles", :force => true do |t|
     t.integer  "article_id"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(:version => 20130220024007) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "message"
+    t.integer  "user_id"
+    t.integer  "admin_id"
+    t.integer  "message_type_id"
+    t.integer  "message_id"
+    t.boolean  "replied",         :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
   create_table "section_titles", :force => true do |t|
     t.integer  "article_id"
     t.string   "title"
@@ -46,6 +58,23 @@ ActiveRecord::Schema.define(:version => 20130220024007) do
     t.text     "text"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+  end
+
+  create_table "source_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sources", :force => true do |t|
+    t.integer  "type_id"
+    t.integer  "article_id"
+    t.string   "title"
+    t.string   "source"
+    t.string   "link"
+    t.text     "notes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "sub_section_titles", :force => true do |t|

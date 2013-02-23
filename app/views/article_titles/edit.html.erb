@@ -1,10 +1,21 @@
 
- <%=  simple_form_for :titles, :url => create_article_title_path, 
- 					  :method => 'put' do |f| %>
 
-	  <%= f.text_field :list %>
+<% @titles.each do |title| %>
+	<h3>
+		<%= title.title %>
+		<% if title.id %>
+			<%= link_to 'Delete', article_title_path(title), :method => :delete %>
+		<% end %>
+	</h3>
+<% end %>
+
+<%=  simple_form_for @title, :url => article_title_path(@article), :method => 'put' do |f| %>
+	  <%= f.text_field :title %>
 	  <br>
 	  <br>
-	  <%= f.button :submit, 'Create Article' %>
+	  <%= f.button :submit, 'Add Title/s' %>
  <% end %>
+
+ <br>
+ <%= link_to 'Back to Article', edit_article_path(@article), :class => 'btn' %>
 
