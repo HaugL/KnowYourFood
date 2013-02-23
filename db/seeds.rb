@@ -7,4 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-admin = User.create(:name => 'Lianne Haug', :email => 'lianne.haug@colorado.edu', :password => 'yomama', :password_confirmation => 'yomama')
+admin = User.new(:name => 'Lianne Haug', :email => 'lianne.haug@colorado.edu')
+admin.password = 'yomama'
+admin.password_confirmation = 'yomama'
+admin.admin = true
+admin.save
