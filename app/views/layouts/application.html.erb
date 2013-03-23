@@ -3,108 +3,124 @@
   <head>
     <title>Ruby on Rails: Welcome aboard</title>
       <%= stylesheet_link_tag "application"%>
+      javascript_include_tag(:application)
       <%= csrf_meta_tags %>
     <style type="text/css" media="screen">
-     
-      html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-      body { margin: 0; font-size: 13px; line-height: 1.231; font-family: 'Raleway', sans-serif; }
-      body, button, input, select, textarea { font-family: 'Raleway', sans-serif; color: #222; }
+    
+      body { background-color: #d4d4d4; }
 
-      /* =============================================================================
-      Links
-      ========================================================================== */
-      a { color: #5f5f5f; text-decoration: none; -webkit-transition:color 0.2s linear; -moz-transition:color 0.2s linear; }
-      a:visited { color: #5f5f5f; }
+      #search {
 
-    /*  a:hover { color: #e6af61; -webkit-transition:color 0.2s linear; -moz-transition:color 0.2s linear; }
-      a:focus { outline: thin dotted; }
-      /* =============================================================================
-      Navbar
-      ========================================================================== */
-      #navbar {height:30px; padding-top:10px; width:100%; position: fixed; 
-               background-color:#434343; text-align:center; font-weight:800; font-size:1.3em;}
-      #navbar a{color: #e6af61; padding-right:20px; padding-top:40px;}
+      }
 
-      #whitespace {height:5px; padding-top:50px; width:100%; background-color:#fff; position: fixed;}
+      #search input[type="text"] {
+          background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+          border: 1px solid #d1d1d1;
+          font: bold 20px Arial,Helvetica,Sans-serif;
+          color: #bebebe;
+          width: 50%;
+          height: 80px;
+          padding: 6px 15px 6px 35px;
+          -webkit-border-radius: 20px;
+          -moz-border-radius: 20px;
+          border-radius: 40px;
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          -webkit-transition: all 0.7s ease 0s;
+          -moz-transition: all 0.7s ease 0s;
+          -o-transition: all 0.7s ease 0s;
+          transition: all 0.7s ease 0s;
+          position: fixed;
+          top:50px;
+          left:28%;
+          }
 
-#intro { height: 1000px; padding-top:100px; width:100%; padding-bottom:40px; float:left; background-repeat: no-repeat; background-attachment: scroll; background-position: center center; background-clip: border-box; background-origin: padding-box; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-color:#e6af61;}
+      #search input[type="text"]:focus {
+          width: 50%;
+          font: bold 20px Arial,Helvetica,Sans-serif;
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          color:red;
+          }
+
+          .search_icon{
+            position:fixed;
+            height:100px;
+            top:50px;
+            left:20%;
+          }
+
+          .grey_box{
+            background-color: #444444; 
+            position: fixed;
+            height:130px;
+            width:100%;
+            top:30px;
+          }
+
+
 
     </style>
   </head>
 
   <body>
-      <div id ='whitespace'> </div>
-    <div id = 'navbar'>
-      <%= link_to 'Articles', articles_path %>
-      <%= link_to 'Tits', root_path %>
-    </div>
 
-        <section id="intro">
-    <%= yield %>
-    </section>
+    <!-- Header -->
+     <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+     
+          <!-- Be sure to leave the brand out there if you want it shown -->
+      
+          <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
+     
+          <!-- Everything you want hidden at 940px or less, place within here -->
+          <div class="nav-collapse collapse">
+            <ul class="nav nav-tabs">
+
+              <% if request.url.include? 'articles' %>
+                <li class="active">
+                  <%= link_to 'Articles', articles_path %>
+                </li>
+              <% else %>
+                  <li><%= link_to 'Articles', articles_path %></li>
+              <% end %>
+
+
+              <li><%= link_to 'Blog', root_path %></li>
+              <li><a href="#">...</a></li>
+            </ul>
+
+
+              <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Log_in', new_session_path %></ul>
+              
+              <form class="navbar-search pull-right">
+                <input type="text" class="search-query" placeholder="Search">
+              </form>
+
+
+          </div>
+     
+        </div>
+      </div>
+    </div>
+   
+    <div class = 'grey_box'>
+        <%= image_tag 'find.png', :class => 'search_icon' %>
+        <form method="get" action="/search" id="search">
+          <input name="q" type="text" size="40" placeholder="Search..." />
+        </form>
+      </div>
+
+      <br><br><br><br><br><br><br><br><br><br>
+
+      <%= yield %>
+
+    
      
   </body>
 
 
 
   </html>
-
-
-
-  <!--
-  <body>
-    <div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Browse the documentation</h3>
-            <ul class="links">
-              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
-              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
-              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
-              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-      <div id="content">
-        <div id="header">
-          <h1>Welcome aboard</h1>
-          <h2>You&rsquo;re riding Ruby on Rails!</h2>
-        </div>
-
-        <div id="about">
-          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
-          <div id="about-content" style="display: none"></div>
-        </div>
-
-        <div id="getting-started">
-          <h1>Getting started</h1>
-          <h2>Here&rsquo;s how to get rolling:</h2>
-
-          <ol>
-            <li>
-              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
-              <p>To see all available options, run it without parameters.</p>
-            </li>
-
-            <li>
-              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
-              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
-            </li>
-
-            <li>
-              <h2>Create your database</h2>
-              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
-</html>
-
--->
