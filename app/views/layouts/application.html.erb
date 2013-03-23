@@ -1,72 +1,110 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>IndStudy</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Ruby on Rails: Welcome aboard</title>
+      <%= stylesheet_link_tag "application"%>
+      <%= csrf_meta_tags %>
+    <style type="text/css" media="screen">
+     
+      html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+      body { margin: 0; font-size: 13px; line-height: 1.231; font-family: 'Raleway', sans-serif; }
+      body, button, input, select, textarea { font-family: 'Raleway', sans-serif; color: #222; }
 
-</head>
+      /* =============================================================================
+      Links
+      ========================================================================== */
+      a { color: #5f5f5f; text-decoration: none; -webkit-transition:color 0.2s linear; -moz-transition:color 0.2s linear; }
+      a:visited { color: #5f5f5f; }
 
-<!-- header -->
-    <div class="page-header">
-    <img src="/images/logo.png" alt = "logo" width="150" height="228" align = "left">
-    <br>
-    <br>
-    <div style="padding-left: 160px;">
-    <font face="arial black, monaco, chicago" size=8>Independant Study</font> 
-    <h1><small>Subtext for header</small></h1>
-    </div> 
+    /*  a:hover { color: #e6af61; -webkit-transition:color 0.2s linear; -moz-transition:color 0.2s linear; }
+      a:focus { outline: thin dotted; }
+      /* =============================================================================
+      Navbar
+      ========================================================================== */
+      #navbar {height:30px; padding-top:10px; width:100%; position: fixed; 
+               background-color:#434343; text-align:center; font-weight:800; font-size:1.3em;}
+      #navbar a{color: #e6af61; padding-right:20px; padding-top:40px;}
 
+      #whitespace {height:5px; padding-top:50px; width:100%; background-color:#fff; position: fixed;}
+
+#intro { height: 1000px; padding-top:100px; width:100%; padding-bottom:40px; float:left; background-repeat: no-repeat; background-attachment: scroll; background-position: center center; background-clip: border-box; background-origin: padding-box; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-color:#e6af61;}
+
+    </style>
+  </head>
+
+  <body>
+      <div id ='whitespace'> </div>
+    <div id = 'navbar'>
+      <%= link_to 'Articles', articles_path %>
+      <%= link_to 'Tits', root_path %>
     </div>
 
-<body>
+        <section id="intro">
+    <%= yield %>
+    </section>
+     
+  </body>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span2">
-      <!--Sidebar content-->
-        <div class="well well-space">
-            <i class="icon-bookmark"> </i>
-         	  <%= link_to 'View Articles', articles_path %>
-         	<br>
-            <% if session[:user] || session[:admin]%>
-              <i class="icon-hand-right"> </i>
-              <%= link_to 'Log-Out', delete_sessions_path, :method => :delete%>
-              <br>
-            <% else %>
-              <i class="icon-hand-left"> </i>
-              <%= link_to 'Log-In', new_session_path %>
-            <br>
-            <% end %>
 
-            <i class="icon-bookmark"> </i>
-            <%= link_to 'Create Article', new_article_path %>
-            <br>
 
-   
-          <br><br>
-          <i class="icon-home"> </i>
-      
-          <br>
-          <i class="icon-star"> </i>
-    
-        
+  </html>
 
+
+
+  <!--
+  <body>
+    <div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Browse the documentation</h3>
+            <ul class="links">
+              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
+              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
+              <li><a href="http://www.ruby-doc.org/core/">Ruby core</a></li>
+              <li><a href="http://www.ruby-doc.org/stdlib/">Ruby standard library</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="header">
+          <h1>Welcome aboard</h1>
+          <h2>You&rsquo;re riding Ruby on Rails!</h2>
+        </div>
+
+        <div id="about">
+          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
+          <div id="about-content" style="display: none"></div>
+        </div>
+
+        <div id="getting-started">
+          <h1>Getting started</h1>
+          <h2>Here&rsquo;s how to get rolling:</h2>
+
+          <ol>
+            <li>
+              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
+              <p>To see all available options, run it without parameters.</p>
+            </li>
+
+            <li>
+              <h2>Set up a default route and remove <span class="filename">public/index.html</span></h2>
+              <p>Routes are set up in <span class="filename">config/routes.rb</span>.</p>
+            </li>
+
+            <li>
+              <h2>Create your database</h2>
+              <p>Run <code>rake db:create</code> to create your database. If you're not using SQLite (the default), edit <span class="filename">config/database.yml</span> with your username and password.</p>
+            </li>
+          </ol>
         </div>
       </div>
-      <div class="span10">
-      <!--Body content-->
 
-      <%= yield %>
-
-      </div>
+      <div id="footer">&nbsp;</div>
     </div>
-  </div>
-
-
-</body>
+  </body>
 </html>
 
-
-
+-->
