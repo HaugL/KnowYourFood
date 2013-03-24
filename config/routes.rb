@@ -5,11 +5,7 @@ IndStudy::Application.routes.draw do
 
 root :to => 'pages#home'
 
-resources :sessions, :only => [:new, :create]do
-  collection do
-    delete 'delete'
-  end
-end
+resources :sessions, :only => [:new, :create, :destroy]
 
 get 'article_title/:article_id' => 'article_titles#edit', :as => 'edit_article_title'
 put 'article_title/:article_id' => 'article_titles#update', :as => 'article_title'

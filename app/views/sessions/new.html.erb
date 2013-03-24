@@ -1,16 +1,60 @@
+    <style type="text/css" media="screen">
+
+
+      #search input[type="text"] {
+          background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
+          border: 1px solid #d1d1d1;
+          font: bold 20px Arial,Helvetica,Sans-serif;
+          color: #444444;;
+          width: 50%;
+          height: 80px;
+          padding: 6px 15px 6px 35px;
+          -webkit-border-radius: 20px;
+          -moz-border-radius: 20px;
+          border-radius: 40px;
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+          -webkit-transition: all 0.7s ease 0s;
+          -moz-transition: all 0.7s ease 0s;
+          -o-transition: all 0.7s ease 0s;
+          transition: all 0.7s ease 0s;
+          position: fixed;
+          top:55px;
+          left:28%;
+          }
+
+      #search input[type="text"]:focus {
+          width: 50%;
+          font: bold 20px Arial,Helvetica,Sans-serif;
+          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          color:#cc0000;
+          }
+
+
+
+
+    </style>
+
+
+
+
  <% if @error != nil %>
  <%= @error %>
  <% end %>
 <div align = 'center'>
   <h1>Sign In</h1>
   <br><br>
-  <%=  simple_form_for :user, :url => sessions_path, 
-        :html => { :class => 'form-verticle' },:method => 'post' do |f| %>
+  <%=  simple_form_for :user, :url => sessions_path,  
+        :html => { :class => 'form-verticle'},:method => 'post' do |f| %>
     <b><h4>Email</h4></b>
-    <%= f.text_field :email %>
-    <br>
+     <%= f.input :email, :label => false,
+                :input_html => {:style => 'width: 17%; height:30px'}%>
+
+    <b><h4>Password</h4></b>
     <%= f.input :password, :label => false,
-                :input_html => {:style => 'width: 200px; height:30px'}%>
+                :input_html => {:style => 'width: 17%; height:30px'}%>
     <br>
     <%= f.button :submit, 'Log-In', :class => 'btn' %>
     <% end %>

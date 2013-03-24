@@ -8,16 +8,14 @@
     <style type="text/css" media="screen">
     
       body { background-color: #d4d4d4; }
+      a {color:#cc0000;}
 
-      #search {
-
-      }
 
       #search input[type="text"] {
           background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
           border: 1px solid #d1d1d1;
           font: bold 20px Arial,Helvetica,Sans-serif;
-          color: #bebebe;
+          color: #444444;;
           width: 50%;
           height: 80px;
           padding: 6px 15px 6px 35px;
@@ -33,7 +31,7 @@
           -o-transition: all 0.7s ease 0s;
           transition: all 0.7s ease 0s;
           position: fixed;
-          top:50px;
+          top:55px;
           left:28%;
           }
 
@@ -41,7 +39,7 @@
           width: 50%;
           font: bold 20px Arial,Helvetica,Sans-serif;
           text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-          color:red;
+          color:#cc0000;
           }
 
           .search_icon{
@@ -54,10 +52,11 @@
           .grey_box{
             background-color: #444444; 
             position: fixed;
-            height:130px;
+            height:135px;
             width:100%;
             top:30px;
           }
+
 
 
 
@@ -66,56 +65,56 @@
 
   <body>
 
-    <!-- Header -->
-     <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-     
-          <!-- Be sure to leave the brand out there if you want it shown -->
-      
-          <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
-     
-          <!-- Everything you want hidden at 940px or less, place within here -->
-          <div class="nav-collapse collapse">
-            <ul class="nav nav-tabs">
+  <!-- Header -->
+   <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <!-- Logo/Title-->
+        <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
+   
+        <!-- Everything you want hidden at 940px or less, place within here -->
+        <div class="nav-collapse collapse">
+          <ul class="nav nav-tabs">
 
-              <% if request.url.include? 'articles' %>
-                <li class="active">
-                  <%= link_to 'Articles', articles_path %>
-                </li>
-              <% else %>
-                  <li><%= link_to 'Articles', articles_path %></li>
-              <% end %>
+            <% if request.url.include? 'articles' %>
+              <li class="active">
+                <%= link_to 'Articles', articles_path %>
+              </li>
+            <% else %>
+                <li><%= link_to 'Articles', articles_path %></li>
+            <% end %>
 
 
-              <li><%= link_to 'Blog', root_path %></li>
-              <li><a href="#">...</a></li>
-            </ul>
+            <li><%= link_to 'Blog', root_path %></li>
+            <li><a href="#">...</a></li>
+          </ul>
 
+          <% if session[:user] || session[:admin] %>
+            <% route = session[:user] || session[:admin] %>
+            <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Sign Out', session_path(route), :method => :delete %></ul>
+          <% else %>
+            <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Sign In', new_session_path %></ul>
+          <% end %>
 
-              <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Log_in', new_session_path %></ul>
-              
-              <form class="navbar-search pull-right">
-                <input type="text" class="search-query" placeholder="Search">
-              </form>
-
-
-          </div>
-     
         </div>
       </div>
     </div>
-   
-    <div class = 'grey_box'>
-        <%= image_tag 'find.png', :class => 'search_icon' %>
-        <form method="get" action="/search" id="search">
-          <input name="q" type="text" size="40" placeholder="Search..." />
-        </form>
-      </div>
+  </div>
+ 
+  <div class = 'grey_box'>
+      
+      <form action="/search" id="search">
+        <input name="q" type="text" size="40" placeholder="Search..." />
+        <%= image_submit_tag("find.png", :class => 'search_icon' )%>
+  
 
-      <br><br><br><br><br><br><br><br><br><br>
+      </form>
+    </div>
 
+    <br><br><br><br><br><br><br><br><br><br>
+    <div align = 'center' >
       <%= yield %>
+    </div>
 
     
      

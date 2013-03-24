@@ -3,24 +3,24 @@ class SessionsController < ApplicationController
   end
 
   def create
-  user = User.authenticate(params[:user][:email], params[:user][:password])
+    user = User.authenticate(params[:user][:email], params[:user][:password])
 
-  if user
-    #If user is an admin set the session as an admin
-    if user.admin
-      session[:admin] = user
+    if user
+      #If user is an admin set the session as an admin
+      if user.admin
+        session[:admin] = user
+      else
+        session[:user] = user
+      end
+
+      redirect_to root_url, :notice => "Logged in!"
     else
-      session[:user] = user
+      @error = "Invalid email or password"
+      render "new"
     end
-
-    redirect_to root_url, :notice => "Logged in!"
-  else
-    @error = "Invalid email or password"
-    render "new"
   end
-end
 
-  def delete
+  def destroy
     reset_session
     puts 'Admin:'
     puts session[:admin]
