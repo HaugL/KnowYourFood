@@ -1,17 +1,19 @@
  <% if @error != nil %>
  <%= @error %>
  <% end %>
+<div align = 'center'>
+  <h1>Sign In</h1>
+  <br><br>
+  <%=  simple_form_for :user, :url => sessions_path, 
+        :html => { :class => 'form-verticle' },:method => 'post' do |f| %>
+    <b><h4>Email</h4></b>
+    <%= f.text_field :email %>
+    <br>
+    <%= f.input :password, :label => false,
+                :input_html => {:style => 'width: 200px; height:30px'}%>
+    <br>
+    <%= f.button :submit, 'Log-In', :class => 'btn' %>
+    <% end %>
 
-<h1>Admin Log in</h1>
-<%=  simple_form_for :user, :url => sessions_path, 
-      :method => 'post' do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br>
-  <%= f.button :submit, 'Log-In' %>
-  <% end %>
-
-  <%= link_to "Sign-Up", new_user_path %>
+    <%= link_to "Sign-Up", new_user_path %>
+</div>

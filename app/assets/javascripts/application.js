@@ -13,7 +13,8 @@
 //= require jquery_ujs
 //= require jquery
 //= require twitter/bootstrap
-//= require jquery.placeholder
 //= require_tree .
+
+
 
 
