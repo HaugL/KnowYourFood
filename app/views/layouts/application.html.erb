@@ -1,125 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ruby on Rails: Welcome aboard</title>
+    <title>Know Your Food</title>
       <%= stylesheet_link_tag "application"%>
       <%= javascript_include_tag 'jquery', 'application' %>
       <%= csrf_meta_tags %>
-    <style type="text/css" media="screen">
-    
-      body { background-color: #d4d4d4; }
-      a {color:#cc0000;}
 
-
-      #search input[type="text"] {
-          background: url(search-white.png) no-repeat 10px 6px #fcfcfc;
-          border: 1px solid #d1d1d1;
-          font: bold 20px Arial,Helvetica,Sans-serif;
-          color: #444444;;
-          width: 50%;
-          height: 80px;
-          padding: 6px 15px 6px 35px;
-          -webkit-border-radius: 20px;
-          -moz-border-radius: 20px;
-          border-radius: 40px;
-          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-          -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-          -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
-          -webkit-transition: all 0.7s ease 0s;
-          -moz-transition: all 0.7s ease 0s;
-          -o-transition: all 0.7s ease 0s;
-          transition: all 0.7s ease 0s;
-          position: fixed;
-          top:55px;
-          left:28%;
-          }
-
-      #search input[type="text"]:focus {
-          width: 50%;
-          font: bold 20px Arial,Helvetica,Sans-serif;
-          text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-          color:#cc0000;
-          }
-
-          .search_icon{
-            position:fixed;
-            height:100px;
-            top:50px;
-            left:20%;
-          }
-
-          .grey_box{
-            background-color: #444444; 
-            position: fixed;
-            height:135px;
-            width:100%;
-            top:30px;
-          }
-
-
-
-
-    </style>
   </head>
 
-  <body>
+<body>
+  <div class="header">
+    <!-- Header -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- Title-->
+          <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
 
-  <!-- Header -->
-   <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <!-- Logo/Title-->
-        <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
-   
-        <!-- Everything you want hidden at 940px or less, place within here -->
-        <div class="nav-collapse collapse">
-          <ul class="nav nav-tabs">
+          <!-- Tabbed Nav Bar -->
+          <section id = 'tabs' >
+            <ul class="nav nav-tabs">
+              <!-- Articles Tab -->
+              <% if request.url.include? 'articles' %>
+                <li class="active">
+                  <%= link_to 'Articles', articles_path %>
+                </li>
+              <% else %>
+                  <li><%= link_to 'Articles', articles_path %></li>
+              <% end %>
+              <!-- Blog Tab -->
+              <% if request.url.include? 'blog' %>
+                  <li class="active">
+                    <%= link_to 'Blog', root_path %>
+                  </li>
+                <% else %>
+                    <li><%= link_to 'Blog', root_path %></li>
+                <% end %>
+              </ul>
+            </section>
 
-            <% if request.url.include? 'articles' %>
-              <li class="active">
-                <%= link_to 'Articles', articles_path %>
-              </li>
-            <% else %>
-                <li><%= link_to 'Articles', articles_path %></li>
-            <% end %>
-
-
-            <li><%= link_to 'Blog', root_path %></li>
-            <li><a href="#">...</a></li>
-          </ul>
-
-          <% if session[:user] || session[:admin] %>
-            <% route = session[:user] || session[:admin] %>
-            <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Sign Out', session_path(route), :method => :delete %></ul>
-          <% else %>
-            <ul class = 'pull-right' style = 'padding-top: 10px;'><%= link_to 'Sign In', new_session_path %></ul>
-          <% end %>
+          <!-- Drop Down Menu -->
+          <section id = 'stacked'>
+            <br><br>
+            <ul class="nav nav-tabs nav-stacked">
+              <li><%= link_to 'Articles', articles_path %></li>
+              <br>
+              <li><%= link_to 'Articles', articles_path %></li>
+            </ul>
+          </section>
 
         </div>
       </div>
     </div>
-  </div>
- 
-  <div class = 'grey_box'>
-      
+
+
+    <div class = 'grey_box'>
       <form action="/search" id="search">
         <input name="q" type="text" size="40" placeholder="Search..." />
         <%= image_submit_tag("find.png", :class => 'search_icon' )%>
-  
-
       </form>
     </div>
+  </div>
+  
+  <div class="content">
+    <%= yield %>
+  </div>
 
-    <br><br><br><br><br><br><br><br><br><br>
-    <div align = 'center' >
-      <%= yield %>
-    </div>
-
-    
-     
-  </body>
-
-
-
-  </html>
+</body>
+</html>
