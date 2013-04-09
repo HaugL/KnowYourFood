@@ -14,10 +14,11 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
+
           <!-- Title-->
           <%= link_to 'Know Your Food', root_path, :class => 'brand' %>
 
-          <!-- Tabbed Nav Bar -->
+          <!-- Horizontal Tabbed Nav Bar -->
           <section id = 'tabs' >
             <ul class="nav nav-tabs">
               <!-- Articles Tab -->
@@ -39,7 +40,7 @@
               </ul>
             </section>
 
-          <!-- Drop Down Menu -->
+          <!-- Vertical Tabbed Nav Bar -->
           <section id = 'stacked'>
             <br><br>
             <ul class="nav nav-tabs nav-stacked">
@@ -50,6 +51,16 @@
           </section>
 
         </div>
+
+        <section id = 'session-link' >
+          <% if session[:user] || session[:admin] %>
+            <%= link_to 'Sign Out', session_path(0), :method => :delete %>
+          <% else %>
+            <%= link_to 'Sign In', new_session_path %>
+          <% end %>
+        </section>
+
+
       </div>
     </div>
 

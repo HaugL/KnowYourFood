@@ -1,117 +1,80 @@
+<script>
+	alert($('.click'));
+	alert('tits');
+	$(function action() {
+	    $('.click').bind('click', function (e) {
+	       $.ajax({
+	       type: 'GET',
+	       url: '/get_section?section_title='+e.target,
+	       success: setSection,
+	       error: setEmpty,
+	       async:   false
+	      });
+	    });
+	});
 
-<script type="text/javascript">
-$(function() {
-    $('.nav').bind('click', function (e) {
-        e.target(window.alert($('.nav')))
-    });
-});
+	function getSection(target){}
+
+	function setSection(section){
+		//empty out div
+		$('#section-content').empty();
+
+		//If the section has text, then display it
+		if(section.text != null)
+			addSectionText(section.text);
+
+		//For each sub_section add a sub section title and sub section text
+		jQuery.each(section.sub_sections, function(i, val) {
+			addSubSectionTitle(i);
+			addSubSectionText(val.text);
+		});
+	}
+
+	function setEmpty(){
+
+	}
+
+	function addSectionText(text){
+		var section_content = document.getElementById('section-content');
+		var newText = document.createElement('div');
+		newText.setAttribute('class', 'section-text');
+		newText.innerHTML = text;
+		section_content.appendChild(newText);
+	}
+
+	function addSubSectionTitle(title){
+		var section_content = document.getElementById('section-content');
+		var newTitle = document.createElement('div');
+		newTitle.setAttribute('class', 'sub-section-title');
+		newTitle.innerHTML = title;
+		section_content.appendChild(newTitle);
+	}
+
+	function addSubSectionText(text){
+		var section_content = document.getElementById('section-content');
+		var newText = document.createElement('div');
+		newText.setAttribute('class', 'sub-section-text');
+		newText.innerHTML = text;
+		section_content.appendChild(newText);
+	}
+
 </script>
-    
-<div class="container">
 
-<div id="content">
-    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li class="active"><a href="#red" data-toggle="tab">Red</a></li>
-        <li><a href="#tits" data-toggle="tab">Orange</a></li>
-        <li><a href="#yellow" data-toggle="tab">Yellow</a></li>
-        <li><a href="#green" data-toggle="tab">Green</a></li>
-        <li><a href="#blue" data-toggle="tab">Blue</a></li>
-    </ul>
-    <div id="my-tab-content" class="tab-content">
-        <div class="tab-pane active" id="red">
-            <h1>Red</h1>
-            <p>red red red red red red</p>
-        </div>
-        <div class="tab-pane" id="tits">
-            <h1>Orange</h1>
-            <p>orange orange orange orange orange</p>
-        </div>
-        <div class="tab-pane" id="yellow">
-            <h1>Yellow</h1>
-            <p>yellow yellow yellow yellow yellow</p>
-        </div>
-        <div class="tab-pane" id="green">
-            <h1>Green</h1>
-            <p>green green green green green</p>
-        </div>
-        <div class="tab-pane" id="blue">
-            <h1>Blue</h1>
-            <p>blue blue blue blue blue</p>
-        </div>
+
+<div class = 'center'>
+
+  <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+  	<li class="active"><a href="<%=@section_titles.first.id%>" data-toggle="tab" class = 'click'><%= @section_titles.first.title %></a></li>
+  	<% @section_titles.shift %>
+  	<% @section_titles.each do |section_title| %>
+  		<li><a href="<%=section_title.id%>" data-toggle="tab" class = 'click'><%= section_title.title %></a></li>
+  	<% end %>
+  </ul>
+
+    <div id = 'section-content' class = 'section-content' >
     </div>
-</div>
 
 
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $('#tabs').tab();
-    });
-</script>    
-</div> <!-- container -->
-
-
-<script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
-
-
-
-
-
-<!--        -->
-<!-- Titles -->
-<h1>
-	<%= get_names(@article) %>
-	<%= link_to 'Edit Titles', edit_article_title_path(@article), :class => 'btn' if session[:admin] %>
-
-	<!-- How to edit? Can't just let them have text field, need
-	to destroy them properly. hmmm -->
-</h1>
-
-<!--          -->
-<!-- Sections -->
-<br>
-<% @section_titles.each do |section_title| %>
-	<% section = Section.find_by_section_title_id(section_title) %>
-
-	<!-- Section Title-->
-	<h3> 
-		<%= section_title.title %>
-		<!-- Admin Features for Sections-->
-		<% if session[:admin] %>
-			<%= link_to 'Edit' , edit_article_section_path(@article, section) , :class => 'btn' %> 
-			<%= link_to 'Delete', article_section_path(@article, section), :method => :delete, :class => 'btn' %>
-			<%= link_to 'Add Sub-Section', new_article_section_sub_section_path(@article, section), :class => 'btn' %>
-		<% end %>
-	</h3>
-
-	<!-- Section Text -->
-	<% if section.text %>
-		<%= section.text %>
-	<% end %>
-
-
-	<!--              -->
-	<!-- Sub_Sections -->
-	<% section_title.sub_section_titles.each do |sub_title| %>
-		<% sub_section = SubSection.find_by_sub_section_title_id(sub_title) %>
-
-		<!-- Sub-Section Title -->
-		<h4>
-			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= sub_title.title %>
-			<!-- Admin Features for Sub-Sections -->
-			<% if session[:admin] %>
-				<%= link_to 'Edit' , edit_article_section_sub_section_path(@article, section, sub_section) , :class => 'btn' %> 
-				<%= link_to 'Delete', article_section_sub_section_path(@article, section, sub_section), :method => :delete, :class => 'btn' %>
-			<% end %>
-		</h4>
-
-		<!-- Sub-Section Text -->
-		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <%= sub_section.text %>
-	<% end %>
-	<br>
-	<br>
-<% end %>
-
-<!--         -->
 <!-- Sources -->
 <h1>Sources:
 	<%= link_to 'Add Source', new_article_source_path(@article), :class => 'btn' if session[:admin] %>

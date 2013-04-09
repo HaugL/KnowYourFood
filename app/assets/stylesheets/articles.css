@@ -1,0 +1,30 @@
+
+.center{
+	margin-left:300px;
+	margin-right:auto;
+	width:auto;
+}
+
+.section-content{
+}
+
+.section-text{
+	margin-bottom:30px;
+}
+
+.sub-section-title{
+	color:#cc0000;
+	font: bold 30px Arial,Helvetica,Sans-serif;
+	font-weight: 3;
+	margin-bottom:15px;
+}
+
+.sub-section-text{
+	margin-bottom:15px;
+	margin-right:20px;
+}
+
+.grey{
+	background-color: #444444;
+}
+

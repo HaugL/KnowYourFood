@@ -1,0 +1,122 @@
+body { 
+	background-color: #d4d4d4;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+}
+
+
+a {
+	color:#cc0000;
+}
+
+
+
+#search input[type="text"] {
+	background: white;
+  font: bold 20px Arial,Helvetica,Sans-serif;
+  color: #444444;;
+  height: 80px;
+  padding: 6px 15px 6px 35px;
+  border-radius: 40px;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+  position: absolute;
+  left:300px;
+  top: 20px;
+  right: 300px;
+  width: auto;
+  /*max-width:600px;*/
+}
+
+#search input[type="text"]:focus {
+  font: bold 20px Arial,Helvetica,Sans-serif;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  color:#cc0000;
+}
+
+.search_icon {
+	height:100px;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+  position: absolute;
+  right: 180px;
+  top: 20px;
+}
+
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;	
+}
+
+.header > * {
+	margin: 0;
+	padding: 0;
+}
+
+.grey_box{
+	background-color: #444444; 
+	width:100%;
+	text-align: center;
+  -webkit-transition: all 0.7s ease 0s;
+  -moz-transition: all 0.7s ease 0s;
+  -o-transition: all 0.7s ease 0s;
+  transition: all 0.7s ease 0s;
+  position: fixed;
+  height: 140px;
+}
+
+.grey_box form {
+	width: 100%;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.content {
+	margin-top: 200px;
+}
+
+/* Layout when the width is too small for normal layout */
+@media screen and (max-width:767px) {
+		body {
+		padding: 0;
+	}
+
+  #session-link{
+    position:fixed;
+    top:13px;
+    left:190px;
+  }
+
+  .grey_box{top:150px;}
+	#tabs .nav-tabs { display:none; }
+	.navbar-inner { padding-bottom: 30px; }
+	.navbar { padding-bottom: auto; }
+	.content{margin-top:310px;}
+
+  #search input[type="text"] {left:40px; right: 140px;}
+  .search_icon{right:20px;}
+
+
+}
+
+@media screen and (min-width:768px){
+	#stacked .nav-tabs {display:none;}
+  .navbar-inner { padding-bottom: 100px; }
+  .grey_box{top:42px;}
+
+  #session-link{
+    position:fixed;
+    top:13px;
+    right:30px;
+  }
+}

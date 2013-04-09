@@ -25,6 +25,11 @@ resources :articles do
 end
 resources :users, :only => [:show, :new, :create]
 
+
+
+#AJAX routes
+get 'get_section' => 'ajax#get_section'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
