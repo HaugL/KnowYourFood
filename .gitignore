@@ -7,6 +7,9 @@ logout
 
 [Process completed]
 
+/tmp/*
+/log/*
+
 
 
 
