@@ -48,9 +48,11 @@ class ArticlesController < ApplicationController
 	def show
 		@article = Article.find(params[:id])
 		@section_titles = @article.section_titles
+		@first_section = @section_titles.first
+		@sub_section_titles = @first_section.sub_section_titles
 		@comment = @article.comments.new
-		@comments = @article.comments.all
-		@sources = @article.sources.all
+		@comments = @article.comments.limit(3)
+		@sources = @article.sources.limit(3)
 	end
 
 

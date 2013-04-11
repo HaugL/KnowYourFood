@@ -3,7 +3,7 @@
   <head>
     <title>Know Your Food</title>
       <%= stylesheet_link_tag "application"%>
-      <%= javascript_include_tag 'jquery', 'application' %>
+      <%= javascript_include_tag "application" %>
       <%= csrf_meta_tags %>
 
   </head>
@@ -29,14 +29,26 @@
               <% else %>
                   <li><%= link_to 'Articles', articles_path %></li>
               <% end %>
+
+              <!-- About Tab -->
+              <% if request.url.include? 'about' %>
+                  <li class="active">
+                    <%= link_to 'About', about_path %>
+                  </li>
+              <% else %>
+                  <li><%= link_to 'About', about_path %></li>
+              <% end %>
+
               <!-- Blog Tab -->
               <% if request.url.include? 'blog' %>
                   <li class="active">
                     <%= link_to 'Blog', root_path %>
                   </li>
-                <% else %>
-                    <li><%= link_to 'Blog', root_path %></li>
-                <% end %>
+              <% else %>
+                  <li><%= link_to 'Blog', root_path %></li>
+              <% end %>
+
+
               </ul>
             </section>
 
@@ -46,7 +58,10 @@
             <ul class="nav nav-tabs nav-stacked">
               <li><%= link_to 'Articles', articles_path %></li>
               <br>
-              <li><%= link_to 'Articles', articles_path %></li>
+              <li><%= link_to 'About', 
+                about_path %></li>
+              <br>
+              <li><%= link_to 'Blog',     root_path %></li>
             </ul>
           </section>
 

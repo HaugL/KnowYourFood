@@ -1,9 +1,8 @@
 IndStudy::Application.routes.draw do
 
-
-  get "comments/show"
-
+#Pages
 root :to => 'pages#home'
+get'/about' => 'pages#about'
 
 resources :sessions, :only => [:new, :create, :destroy]
 

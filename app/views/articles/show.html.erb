@@ -1,64 +1,4 @@
-<script>
-	alert($('.click'));
-	alert('tits');
-	$(function action() {
-	    $('.click').bind('click', function (e) {
-	       $.ajax({
-	       type: 'GET',
-	       url: '/get_section?section_title='+e.target,
-	       success: setSection,
-	       error: setEmpty,
-	       async:   false
-	      });
-	    });
-	});
 
-	function getSection(target){}
-
-	function setSection(section){
-		//empty out div
-		$('#section-content').empty();
-
-		//If the section has text, then display it
-		if(section.text != null)
-			addSectionText(section.text);
-
-		//For each sub_section add a sub section title and sub section text
-		jQuery.each(section.sub_sections, function(i, val) {
-			addSubSectionTitle(i);
-			addSubSectionText(val.text);
-		});
-	}
-
-	function setEmpty(){
-
-	}
-
-	function addSectionText(text){
-		var section_content = document.getElementById('section-content');
-		var newText = document.createElement('div');
-		newText.setAttribute('class', 'section-text');
-		newText.innerHTML = text;
-		section_content.appendChild(newText);
-	}
-
-	function addSubSectionTitle(title){
-		var section_content = document.getElementById('section-content');
-		var newTitle = document.createElement('div');
-		newTitle.setAttribute('class', 'sub-section-title');
-		newTitle.innerHTML = title;
-		section_content.appendChild(newTitle);
-	}
-
-	function addSubSectionText(text){
-		var section_content = document.getElementById('section-content');
-		var newText = document.createElement('div');
-		newText.setAttribute('class', 'sub-section-text');
-		newText.innerHTML = text;
-		section_content.appendChild(newText);
-	}
-
-</script>
 
 
 <div class = 'center'>
@@ -71,17 +11,24 @@
   	<% end %>
   </ul>
 
-    <div id = 'section-content' class = 'section-content' >
-    </div>
+<div id = 'section-content' class = 'general-content' >
+	<!-- Get first text -->
+	<div class='section-text'><%= @first_section.sections.first.text %></div>
+	<% @sub_section_titles.each do |title| %>
+		<div class = 'sub-section-title'><%= title.title %></div>
+		<div class = 'sub-section-text'><%= title.sub_sections.first.text %></div>
+	<% end %>
+</div>
 
-
+<div class = 'general-content other-content'>
 <!-- Sources -->
-<h1>Sources:
+<div class = 'title'>Sources
 	<%= link_to 'Add Source', new_article_source_path(@article), :class => 'btn' if session[:admin] %>
-</h1>
+</div>
 <br>
 <% @sources.each do |source| %>
 	<!-- Source Title -->
+	<div class='other-box'>
 	<h4>
 		<%= source.title %>
 		<!-- Admin Features for Sources -->
@@ -100,13 +47,43 @@
 	<br>
 	<% source.notes if source.notes %>
 	<br>
+	</div>
 <% end %>
+<div class ='other-more'>
+	<% source_count = @article.sources.count %>
+	<% if source_count > 3 && source_count != nil %>
+		<%= link_to (source_count-3).to_s+' more sources . . . ', root_path %>
+	<% end %>
+</div>
+</div>
 
 
 <!--          -->
 <!-- Comments -->
-<br><br>
-<h4>Comments:</h4><br>
+<div class = 'general-content other-content'>
+<div class = 'title'>Comments</div>
+
+	<% @comments.each do |comment| %>
+		<div class = 'other-box'>
+		<h4>
+			<%= comment.user.name %>
+			<% if session[:admin] %>
+				<%= link_to 'Delete', article_comment_path(@article, comment.id), :method => :delete, :class => 'btn' %>
+			<% end %>
+		</h4>
+		<%= comment.text %>
+		</div>
+	<% end %>
+
+	<div class ='other-more'>
+		<% comment_count = @article.comments.count %>
+		<% if comment_count > 3 && comment_count != nil %>
+			<%= link_to (comment_count-3).to_s+' more sources . . . ', root_path %>
+		<% end %>
+	</div>
+
+
+
 	<% if session[:user] || session[:admin] %>
 		<%=  simple_form_for [@article, @comment] do |f| %>
 
@@ -116,16 +93,4 @@
 	<% else %>
 		<%= link_to 'Log-In', new_session_path %> to Comment
 	<% end %>
-
-	<br>
-	<% @comments.each do |comment| %>
-
-		<h4>
-			<%= comment.user.name %>
-			<% if session[:admin] %>
-				<%= link_to 'Delete', article_comment_path(@article, comment.id), :method => :delete, :class => 'btn' %>
-			<% end %>
-		</h4>
-		<%= comment.text %>
-		<br><br>
-	<% end %>
+</div>
