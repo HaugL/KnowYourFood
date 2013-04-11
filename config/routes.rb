@@ -4,6 +4,8 @@ IndStudy::Application.routes.draw do
 root :to => 'pages#home'
 get'/about' => 'pages#about'
 
+get '/search' => 'search#search'
+
 resources :sessions, :only => [:new, :create, :destroy]
 
 get 'article_title/:article_id' => 'article_titles#edit', :as => 'edit_article_title'
@@ -19,7 +21,7 @@ resources :articles do
 
   resources :comments, :only => [:create, :show, :destroy]
 
-  resources :sources, :except => [:index, :show]
+  resources :sources, :except => [ :show]
 
 end
 resources :users, :only => [:show, :new, :create]

@@ -35,6 +35,15 @@ class SourcesController < ApplicationController
 
 ################################################
 
+	def index
+		@article = Article.find(params[:article_id])
+		@sources = @article.sources
+		puts @sources
+	end
+
+
+################################################
+
 	def destroy
 		Source.find(params[:id]).destroy
 		redirect_to article_path(params[:article_path])

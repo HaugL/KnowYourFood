@@ -52,7 +52,7 @@
 <div class ='other-more'>
 	<% source_count = @article.sources.count %>
 	<% if source_count > 3 && source_count != nil %>
-		<%= link_to (source_count-3).to_s+' more sources . . . ', root_path %>
+		<%= link_to (source_count-3).to_s+' more sources . . . ', article_sources_path(@article) %>
 	<% end %>
 </div>
 </div>
