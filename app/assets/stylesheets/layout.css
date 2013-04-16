@@ -9,6 +9,10 @@ a {
 	color:#cc0000;
 }
 
+a:hover{
+  color:#e6af61;
+}
+
 
 
 #search input[type="text"] {

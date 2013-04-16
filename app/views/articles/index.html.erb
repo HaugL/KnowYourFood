@@ -1,20 +1,13 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
+<div class = 'center'>
+	<% for i in 0..@articles.length-1 do %>
+	    <div class = 'general-content'>
+	    	<div class = 'title main-title-large'><%= link_to @articles_hash[i][:titles], article_path(@articles_hash[i][:id]) %></div>
+	    	<% if session[:admin] != nil %>
+				<%= link_to 'Edit', edit_article_path(@articles_hash[i][:id]), :class => 'btn' %>
+				<%= link_to 'Delete', article_path(@articles_hash[i][:id]), :method => :delete, :class => 'btn' %>
+			<% end %>
+	    </div>
+	<% end %>
+</div>
 
 
-<% @articles.each do |article| %>
- 		<p>
- 			<% name = get_names(article) %>
- 			<% if name.nil? %>
- 				<%= link_to 'No Name', article_path(article) %>
- 			<% else %>
- 				<%= link_to name, article_path(article) %>
- 			<% end %>
-
- 			<% if session[:admin] != nil %>
-
- 				<%= link_to 'Edit', edit_article_path(article), :class => 'btn' %>
- 				<%= link_to 'Delete', article_path(article), :method => :delete, :class => 'btn' %>
- 			<% end %>
- 		</p>
- 	<% end %>

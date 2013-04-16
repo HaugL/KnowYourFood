@@ -3,6 +3,9 @@
 
 <div class = 'center'>
 
+	<div class = 'title main-title-large'><%= @title %></div>
+	
+
   <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
   	<li class="active"><a href="<%=@section_titles.first.id%>" data-toggle="tab" class = 'click'><%= @section_titles.first.title %></a></li>
   	<% @section_titles.shift %>
@@ -15,7 +18,7 @@
 	<!-- Get first text -->
 	<div class='section-text'><%= @first_section.sections.first.text %></div>
 	<% @sub_section_titles.each do |title| %>
-		<div class = 'sub-section-title'><%= title.title %></div>
+		<div class = 'title sub-section-title'><%= title.title %></div>
 		<div class = 'sub-section-text'><%= title.sub_sections.first.text %></div>
 	<% end %>
 </div>
@@ -92,5 +95,29 @@
 	 	<% end %>
 	<% else %>
 		<%= link_to 'Log-In', new_session_path %> to Comment
+	<% end %>
+</div>
+
+
+
+
+<!-- Messages -->
+<div class = 'general-content'>
+	<div class = 'title'>Get Involved</div>
+	Do you have more information on this article, see something that isn't true or have a good source?
+	The purpose of this website, which you can read more in the <%= link_to 'about page', about_path %> is to post factual, up-to-date information on the food system, but this can't be done by the creators alone. Send us a message and help us make this website the best that it can be! 
+	<br>
+
+	<% if session[:user] || session[:admin] %>
+		<%=  simple_form_for [@article, @message] do |f| %>
+
+		  <%= f.input :subject, :label => 'Subject' %>
+		  <%= f.input :message_type_id, :collection => @message_types, :label => 'Why are you sending us a message?' %>
+		  <%= f.input :message %>
+		  <% f.hidden_field :user_id, :value => session[:user] %>
+		  <%= f.button :submit, 'Send Your Message' %>
+	 	<% end %>
+	<% else %>
+		<%= link_to 'Log-In', new_session_path %> to Send Messages
 	<% end %>
 </div>
