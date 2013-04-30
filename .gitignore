@@ -9,6 +9,7 @@ logout
 
 /tmp/*
 /log/*
+/config/initializers/setup_mailer.rb
 
 
 

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416192810) do
+ActiveRecord::Schema.define(:version => 20130421175000) do
+
+  create_table "admin_messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "text"
+    t.integer  "user_id"
+    t.integer  "admin_id"
+    t.integer  "message_type_id"
+    t.integer  "message_id"
+    t.boolean  "replied",         :default => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "article_id"
+  end
 
   create_table "article_titles", :force => true do |t|
     t.integer  "article_id"
@@ -23,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130416192810) do
   create_table "articles", :force => true do |t|
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "main_title"
   end
 
   create_table "comments", :force => true do |t|
@@ -38,19 +52,6 @@ ActiveRecord::Schema.define(:version => 20130416192810) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "messages", :force => true do |t|
-    t.string   "subject"
-    t.text     "message"
-    t.integer  "user_id"
-    t.integer  "admin_id"
-    t.integer  "message_type_id"
-    t.integer  "message_id"
-    t.boolean  "replied",         :default => false
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
-    t.integer  "article_id"
   end
 
   create_table "section_titles", :force => true do |t|
