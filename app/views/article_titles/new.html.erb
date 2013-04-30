@@ -1,0 +1,24 @@
+
+ <div class = 'center'>
+		<div class = 'general-content center-text'>
+			<div class = 'title'>Enter Other Titles</div>
+
+			 <h4>Different foods can be called by different names. Pork could be called pigs, ham, bacon, etc.</h4>
+			 <h4>Enter the different names you wish this article to be searchable by. Put commas in between each one</h4>
+			 <h4>An example of this would be Pork, Pigs, Pig, Bacon, Ham</h4>
+
+			<div class = 'center-form'>
+				<%=  simple_form_for :titles, :url => article_titles_path(@article), 
+	 					  :method => 'post' do |f| %>
+
+					  <%= f.text_field :list %>
+					  <%= f.hidden_field :article_id, :value => @article.id %>
+					  <br>
+					  <br>
+					  <%= f.button :submit, 'Add Titles' %>
+				 <% end %>
+			</div>
+			<br>
+			 Or, if there are no more titles, <%= link_to 'move onto entering information', edit_article_path(@article) %> 
+		</div>
+	</div>

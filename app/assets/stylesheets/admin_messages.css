@@ -1,0 +1,12 @@
+.text-error #admin_message_text::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #cc0000;;
+}
+.text-error #admin_message_text:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #cc0000;;
+}
+.text-error #admin_message_text::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #cc0000;;
+}
+.text-error #admin_message_text:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #cc0000;;
+}

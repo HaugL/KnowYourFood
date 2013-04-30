@@ -1,0 +1,21 @@
+		
+
+	<div class = 'center'>
+
+		<div class = 'general-content center-text'>
+			<div class = 'title'> Make a Comment</div>
+			<div class = 'center-form'>
+				<%= form_for [@article, @comment] do |f| %>
+					<% if @comment.errors[:text].any? %>
+						  <div class = 'text-error' id = 'text-error'>
+						  	<%= f.text_area :text, :placeholder => 'Cannot Be Blank' %>
+						  </div>
+						  <% else %>
+						  	<%= f.text_area :text, :placeholder => 'Enter Your Comment Here'%>
+						<% end %>
+						<br>
+				  	<%= f.submit 'Enter' %>
+				<% end %>
+			</div>
+		</div>
+	</div>

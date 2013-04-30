@@ -2,20 +2,36 @@ class ArticleTitlesController < ApplicationController
 
 	def new
 		@article = Article.find(params[:article_id])
-		@title = @article.titles.new
-		@titles = @article.titles.all
-		
-		render 'edit'
 	end
 
 	def create
 		@article = Article.find(params[:article_id])
-		title = @article.titles.create(params[:title])
-		@title = @article.titles.new
-		@titles = @article.titles.all
+		titles = params[:titles][:list].split(',')
 
-		render 'edit'		
+		titles.each do |title|
+			@article.article_titles.create(:title => title)
+		end
+
+		redirect_to edit_article_path(@article.id)
 	end
+
+
+	# def new
+	# 	@article = Article.find(params[:article_id])
+	# 	@title = @article.titles.new
+	# 	@titles = @article.titles.all
+		
+	# 	render 'edit'
+	# end
+
+	# def create
+	# 	@article = Article.find(params[:article_id])
+	# 	title = @article.titles.create(params[:title])
+	# 	@title = @article.titles.new
+	# 	@titles = @article.titles.all
+
+	# 	render 'edit'		
+	# end
 
 	def edit
 		@article = Article.find(params[:article_id])

@@ -1,32 +1,37 @@
 IndStudy::Application.routes.draw do
 
 #Pages
-root :to => 'pages#home'
+root :to => 'articles#index'
 get'/about' => 'pages#about'
 
 get '/search' => 'articles#search'
 
 resources :sessions, :only => [:new, :create, :destroy]
 
-get 'article_title/:article_id' => 'article_titles#edit', :as => 'edit_article_title'
-put 'article_title/:article_id' => 'article_titles#update', :as => 'article_title'
-delete 'article_title/:article_title_id' => 'article_titles#destroy', :as => 'article_title'
+# get 'article_title/:article_id' => 'article_titles#edit', :as => 'edit_article_title'
+# put 'article_title/:article_id' => 'article_titles#update', :as => 'article_title'
+# delete 'article_title/:article_title_id' => 'article_titles#destroy', :as => 'article_title'
 
 
 resources :articles do
+
+  resources :article_titles, :as => 'titles'
 
   resources :sections, :except => [:show, :index] do
       resources :sub_sections, :except => [:show, :index]
   end
 
-  resources :comments, :only => [:create, :show, :destroy]
+  resources :comments, :only => [:new, :create, :index, :destroy]
 
-  resources :sources, :except => [ :show]
+  resources :sources, :except => [:index]
 
-  resources :messages, :only => [:new, :create, :show, :index]
+  resources :admin_messages, :only => [:new, :create]
 
 end
+
 resources :users, :only => [:show, :new, :create]
+
+resources :admin_messages, :only => [:index, :edit, :update, :destroy]
 
 
 

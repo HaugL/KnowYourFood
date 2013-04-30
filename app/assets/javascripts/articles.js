@@ -49,7 +49,7 @@ $(document).ready(function() {
 	function addSubSectionTitle(title){
 		var section_content = document.getElementById('section-content');
 		var newTitle = document.createElement('div');
-		newTitle.setAttribute('class', 'sub-section-title');
+		newTitle.setAttribute('class', 'title sub-section-title');
 		newTitle.innerHTML = title;
 		section_content.appendChild(newTitle);
 	}
@@ -60,4 +60,8 @@ $(document).ready(function() {
 		newText.setAttribute('class', 'sub-section-text');
 		newText.innerHTML = text;
 		section_content.appendChild(newText);
+	}
+
+	function stringify_names(titles){
+		return 'tits';
 	}

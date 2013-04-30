@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @return_to = params[:return_to]
   end
 
   def create
@@ -8,14 +9,15 @@ class SessionsController < ApplicationController
     if user
       #If user is an admin set the session as an admin
       if user.admin
-        session[:admin] = user
+        session[:admin] = user.id
       else
-        session[:user] = user
+        session[:user] = user.id
       end
 
-      redirect_to root_url, :notice => "Logged in!"
+      redirect_to params[:user][:return_to]
     else
       @error = "Invalid email or password"
+      @return_to = params[:user][:return_to]
       render "new"
     end
   end

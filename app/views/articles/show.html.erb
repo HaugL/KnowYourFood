@@ -1,9 +1,7 @@
 
-
-
 <div class = 'center'>
-
-	<div class = 'title main-title-large'><%= @title %></div>
+	<div class = 'title main-title-large show-title'><%= @article.main_title%></div>
+	<div class = 'title main-title-small show-title'><%= stringify_titles(@article.article_titles)%></div>
 	
 
   <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
@@ -81,20 +79,24 @@
 	<div class ='other-more'>
 		<% comment_count = @article.comments.count %>
 		<% if comment_count > 3 && comment_count != nil %>
-			<%= link_to (comment_count-3).to_s+' more sources . . . ', root_path %>
+			<%= link_to (comment_count-3).to_s+' more comments . . . ', root_path %>
 		<% end %>
 	</div>
 
 
 
 	<% if session[:user] || session[:admin] %>
-		<%=  simple_form_for [@article, @comment] do |f| %>
+		<div class = 'center-text'>
+			<div class = 'center-form'>
+				<%= form_for [@article, @comment] do |f| %>
+				  <%= f.text_area :text, :placeholder => 'Enter Your Comment Here' %><br><br>
+			  	  <%= f.submit 'Submit Your Comment' %>
+			  	<% end %>
+		 </div>
+	 	</div>
 
-		  <%= f.input :text, :label => 'Add a Comment' %>
-		  <%= f.button :submit, 'Submit' %>
-	 	<% end %>
 	<% else %>
-		<%= link_to 'Log-In', new_session_path %> to Comment
+		<%= link_to 'Log-In', new_session_path(:return_to => new_article_comment_url(@article)) %> to Comment
 	<% end %>
 </div>
 
@@ -102,22 +104,26 @@
 
 
 <!-- Messages -->
-<div class = 'general-content'>
+<div class = 'general-content center-text'>
 	<div class = 'title'>Get Involved</div>
 	Do you have more information on this article, see something that isn't true or have a good source?
 	The purpose of this website, which you can read more in the <%= link_to 'about page', about_path %> is to post factual, up-to-date information on the food system, but this can't be done by the creators alone. Send us a message and help us make this website the best that it can be! 
 	<br>
 
-	<% if session[:user] || session[:admin] %>
-		<%=  simple_form_for [@article, @message] do |f| %>
+	<% if session[:user] %>
+		<div class = 'center-form'>
+			<%= form_for [@article, @message] do |f| %>
+		  <%= f.text_field :subject, :placeholder => "Subject"%></br>
+		  <%= f.text_area :text, :placeholder => 'Enter Your Message Here' %>
 
-		  <%= f.input :subject, :label => 'Subject' %>
-		  <%= f.input :message_type_id, :collection => @message_types, :label => 'Why are you sending us a message?' %>
-		  <%= f.input :message %>
-		  <% f.hidden_field :user_id, :value => session[:user] %>
-		  <%= f.button :submit, 'Send Your Message' %>
-	 	<% end %>
+		  <div class = 'message-reason-title'>Why are you messaging us? </div>
+		  <%= f.select :message_type_id, MessageType.all.map {|type| ["#{type.name} ", type.id]} %><br><br>
+		  <%= f.submit 'Send Your Message' %>
+		 <% end %>
+	 	</div>
+	<% elsif session[:admin] %>
+		Admins don't need to send messages. Silly you
 	<% else %>
-		<%= link_to 'Log-In', new_session_path %> to Send Messages
+		<%= link_to 'Log-In', new_session_path(:return_to => new_article_admin_message_url(@article)) %> to Send Messages
 	<% end %>
 </div>

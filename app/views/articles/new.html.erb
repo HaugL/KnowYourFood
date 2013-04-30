@@ -1,4 +1,4 @@
- <h3>Titles</h3>
+<!--  <h3>Titles</h3>
  <br>
  <h4>Different foods can be called by different names. Pork could be called pigs, ham, bacon, etc.</h4>
  <h4>Enter the different names you wish this article to be searchable by. Put commas in between each one</h4>
@@ -14,3 +14,20 @@
 	  <%= f.button :submit, 'Create Article' %>
  <% end %>
 
+ -->
+
+  	<div class = 'center'>
+		<div class = 'general-content center-text'>
+			<div class = 'title'>Create Article</div>
+			 <h4>Enter the main title you want to be associated with this article</h4>
+			<div class = 'center-form'>
+			 <%=  simple_form_for @article do |f| %>
+
+				  <%= f.text_field :main_title %>
+				  <br>
+				  <br>
+				  <%= f.button :submit, 'Create Article' %>
+			 <% end %>
+			</div>
+		</div>
+	</div>

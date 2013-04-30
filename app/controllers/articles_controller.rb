@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 	 before_filter :check_admin, :only => [:new, :create, :edit, :update]
 	 helper_method :get_names
+	 helper_method :stringify_titles
 
 ###########################################
 
@@ -19,14 +20,8 @@ class ArticlesController < ApplicationController
 	end
 
 	def create
-		@article = Article.create
-		titles = params[:titles][:list].split(',')
-
-		titles.each do |title|
-			@article.article_titles.create(:title => title)
-		end
-
-		redirect_to edit_article_path(@article.id)
+		@article = Article.create(params[:article])
+		redirect_to new_article_title_path(@article)
 	end
 
 
@@ -43,12 +38,11 @@ class ArticlesController < ApplicationController
 
 	def index
 		@articles = Article.order("updated_at DESC").limit(5)
-		@articles_hash = create_hash(@articles)
 	end
 
 	def show
 		@article = Article.find(params[:id])
-		@title = stringify_titles(@article.article_titles)
+
 		@section_titles = @article.section_titles
 		@first_section = @section_titles.first
 		@sub_section_titles = @first_section.sub_section_titles
@@ -58,7 +52,7 @@ class ArticlesController < ApplicationController
 		@comment = @article.comments.new
 		@comments = @article.comments.limit(3)
 
-		@message = @article.messages.new
+		@message = @article.admin_messages.new
 		@message_types = MessageType.all
 		
 	end
@@ -74,9 +68,8 @@ class ArticlesController < ApplicationController
 ###########################################
 
 def search
-	@titles = ArticleTitle.find(:all, :conditions => ["title LIKE ?", "#{params[:q]}%"])
-	@articles = find_articles_from_titles(@titles)
-	@articles_hash = create_hash(@articles)
+	titles = ArticleTitle.find(:all, :conditions => ["title LIKE ?", "#{params[:q]}%"])
+	@articles = find_articles_from_titles(titles)
 	render 'index'
 end
 
@@ -104,14 +97,6 @@ end
 		return title[3..title.length]
 	end
 
-	def create_hash(articles)
-		hash = {}
-		articles.each_with_index do |article, i|
-			hash[i] = {:id => article.id, :titles => stringify_titles(article.article_titles)}
-		end
-
-		return hash
-	end
 
 	def find_articles_from_titles(titles)
 		articles = []

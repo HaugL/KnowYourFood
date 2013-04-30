@@ -1,13 +1,12 @@
 <div class = 'center'>
-	<% for i in 0..@articles.length-1 do %>
+	<% @articles.each do |article| %>
 	    <div class = 'general-content'>
-	    	<div class = 'title main-title-large'><%= link_to @articles_hash[i][:titles], article_path(@articles_hash[i][:id]) %></div>
+	    	<div class = 'title'><%= link_to article.main_title, article_path(article) %></div>
+	    	<div class = 'title main-title-small'><%= stringify_titles(article.article_titles) %></div>
 	    	<% if session[:admin] != nil %>
-				<%= link_to 'Edit', edit_article_path(@articles_hash[i][:id]), :class => 'btn' %>
-				<%= link_to 'Delete', article_path(@articles_hash[i][:id]), :method => :delete, :class => 'btn' %>
+				<%= link_to 'Edit', edit_article_path(article), :class => 'btn' %>
+				<%= link_to 'Delete', article_path(article), :method => :delete, :class => 'btn' %>
 			<% end %>
 	    </div>
 	<% end %>
 </div>
-
-

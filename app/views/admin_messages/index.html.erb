@@ -1,0 +1,20 @@
+		
+
+	<div class = 'center'>
+		<% @messages.each do |message| %>
+			<div class = 'general-content center-text'>
+				Subject: <%= message.subject %>
+				<br>
+				Article: <%= message.article.main_title %>
+				<br>
+				<%= link_to 'Reply', edit_admin_message_path(message), :class => 'btn' %>
+				<%= link_to 'Delete', admin_message_path(message), :method => :delete, :class => 'btn' %>
+			</div>
+		<% end %>
+
+		<% if @messages.empty? %>
+			<div class = 'general-content center-text'>
+				There are no messages. Good job!
+			</div>
+		<% end %>
+	</div>

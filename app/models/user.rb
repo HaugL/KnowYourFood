@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :admin
 
   has_many :comments, :dependent => :destroy
+  has_many :admin_messages, :dependent => :destroy
            
   
   attr_accessor :password

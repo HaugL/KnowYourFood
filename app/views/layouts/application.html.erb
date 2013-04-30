@@ -68,10 +68,13 @@
         </div>
 
         <section id = 'session-link' >
+          <% if session[:admin] %>
+            <%= link_to 'View Messages', admin_messages_path %>
+          <% end %>
           <% if session[:user] || session[:admin] %>
             <%= link_to 'Sign Out', session_path(0), :method => :delete %>
           <% else %>
-            <%= link_to 'Sign In', new_session_path %>
+            <%= link_to 'Sign In', new_session_path(:return_to => request.url) %>
           <% end %>
         </section>
 

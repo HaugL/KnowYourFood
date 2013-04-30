@@ -1,0 +1,22 @@
+		
+
+	<div class = 'center'>
+
+		<div class = 'general-content center-text'>
+			<b>Subject: </b> <%= @message.subject %><br>
+			<b>Article: </b><%= @message.article.main_title %><br>
+			<b>User: </b> <%= @message.user.email %><br>
+			<b>Message: </b> <%= @message.text %><br>
+
+			<div class = 'center-form'>
+			<%= form_for :reply , :url => admin_message_path, :method => :put do |f| %>
+
+				<%= f.text_area :text, :placeholder => 'Cannot Be Blank' %>
+
+				<%= f.hidden_field :message_id, :value => @message.id %>
+
+			  	<%= f.submit 'Reply' %>
+			 <% end %>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,26 @@
+		
+
+	<div class = 'center'>
+
+		<div class = 'general-content center-text'>
+			<div class = 'title'> Send Your Message</div>
+			<div class = 'center-form'>
+			<%= form_for [@article, @message] do |f| %>
+			  <%= f.text_field :subject, :placeholder => "Subject"%><br>
+
+			  <% if @message.errors[:text].any? %>
+			  <div class = 'text-error' id = 'text-error'>
+			  	<%= f.text_area :text, :placeholder => 'Cannot Be Blank' %>
+			  </div>
+			  <% else %>
+			  	<%= f.text_area :text%>
+			  <% end %>
+
+
+			  <div class = 'message-reason-title'>Why are you messaging us? </div>
+			  <%= f.select :message_type_id, MessageType.all.map {|type| ["#{type.name} ", type.id]} %><br><br>
+			  <%= f.submit 'Send Your Message' %>
+			 <% end %>
+			</div>
+		</div>
+	</div>

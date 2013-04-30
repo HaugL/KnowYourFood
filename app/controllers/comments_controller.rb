@@ -1,15 +1,28 @@
 class CommentsController < ApplicationController
-  def show
+  def new
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.new
   end
 
   def create
-  	@article = Article.find(params[:article_id])
-  	comment = @article.comments.new(params[:comment])
-  	session[:user] ? comment.user_id = session[:user].id : comment.user_id = session[:admin].id
-  	comment.save
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.new(params[:comment])
+    session[:user] ? @comment.user_id = session[:user] : @comment.user_id = session[:admin]
+    
+    if @comment.save
+      redirect_to article_path(@article)
+    else
 
-  	redirect_to article_path(@article)
+      render 'new'
+    end
+
   end
+
+
+  def show
+
+  end
+
 
   def destroy
   	Comment.find(params[:id]).destroy
