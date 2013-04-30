@@ -16,6 +16,9 @@ IndStudy::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
+  config.assets.precompile += ['about.css', 'admin_messages.css', 'articles.css', 'comments.css', 'layout.css', 'session.css', 'sources.css']
+
+
 
   # Generate digests for assets URLs
   config.assets.digest = true
