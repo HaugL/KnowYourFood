@@ -485,3 +485,28 @@ Compiled layout.css  (0ms)  (pid 662)
 Compiled session.css  (0ms)  (pid 662)
 Compiled sources.css  (0ms)  (pid 662)
 Compiled application.css  (5116ms)  (pid 662)
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+Started GET "/" for 127.0.0.1 at 2013-05-01 14:01:25 -0600
+Processing by ArticlesController#index as HTML
+  Rendered articles/index.html.erb within layouts/application (8.8ms)
+Completed 200 OK in 66ms (Views: 23.2ms | ActiveRecord: 3.8ms)
+Started GET "/assets/application-8a8b7a110d5082f9498e7c1b636ff9a9.js" for 127.0.0.1 at 2013-05-01 14:01:25 -0600
+Served asset /application-8a8b7a110d5082f9498e7c1b636ff9a9.js - 200 OK (524ms)
+Started GET "/assets/application-3c486b86a860ef6e5d66e1504d00b8a2.css" for 127.0.0.1 at 2013-05-01 14:01:25 -0600
+Served asset /application-3c486b86a860ef6e5d66e1504d00b8a2.css - 200 OK (653ms)
+Started GET "/assets/find-f72764c85fe9e1df067cc6e0192b5a6d.png" for 127.0.0.1 at 2013-05-01 14:01:26 -0600
+Served asset /find-f72764c85fe9e1df067cc6e0192b5a6d.png - 200 OK (103ms)
+Started GET "/articles" for 127.0.0.1 at 2013-05-01 14:01:30 -0600
+Processing by ArticlesController#index as HTML
+  Rendered articles/index.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 5ms (Views: 4.3ms | ActiveRecord: 0.3ms)
+Connecting to database specified by database.yml
+Started GET "/" for 127.0.0.1 at 2013-05-01 22:28:26 -0600
+Processing by ArticlesController#index as HTML
+  Rendered articles/index.html.erb within layouts/application (7.2ms)
+Completed 200 OK in 56ms (Views: 17.4ms | ActiveRecord: 3.2ms)
+Started GET "/articles" for 127.0.0.1 at 2013-05-01 22:28:27 -0600
+Processing by ArticlesController#index as HTML
+  Rendered articles/index.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 4ms (Views: 3.8ms | ActiveRecord: 0.3ms)
